@@ -18,8 +18,22 @@ interface Props {
  
 
 const Table = memo(({tableHeaders,tableData}:Props)=>{ 
+    // const [data,setData]=useState()
+    
 
+    /**
+     * Sorting alorithm for status
+     * sortBy="Closed";//closed should be on top
+     *data.map((a,b)=>{
 
+        const status:a.status==sortBy?true:false;
+
+        if(status){
+            return -1;
+        }
+        return 1;
+     })
+     */
     return (
         <div>
             <div className='flex-row'>
