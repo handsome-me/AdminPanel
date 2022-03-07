@@ -1,12 +1,39 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Table from './Components/Table/Table';
+const tableHeaders=["Name","Company","Status","LastUpdate","Notes"];
 
-function App() {
+interface TableData{
+  Name:string,
+  Company:string,
+  Status:"Active" | "Closed",
+  LastUpdate:string,
+  Notes:string
+};
+
+const tableData:TableData[]=[{
+  Name:"Meghraj",
+  Company:"Razarpay",
+  Status:"Active",
+  LastUpdate:"1/07/2022",
+  Notes:"Hey hi, its working really good....."
+},{
+  Name:"Meghraj",
+  Company:"Razarpay",
+  Status:"Active",
+  LastUpdate:"1/07/2022",
+  Notes:"Hey hi, its working really good....."
+}];
+
+function App(){
   return (
     <div className="App">
       <header className="Admin Panel">
-       
+       <Table
+       tableHeaders={tableHeaders}
+       tableData={tableData}
+       ></Table>
       </header>
     </div>
   );

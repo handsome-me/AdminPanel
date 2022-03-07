@@ -1,0 +1,34 @@
+
+.table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+   
+    margin:10px;
+  }
+  
+  .table td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .tabler tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+ 
+.table-row{
+
+}
+
+.table-column{
+
+}
+
+.table-filter-box{
+  display:flex;
+  border:1px solid wheat;
+}
+.flex-row{
+  display:flex;
+
+}
