@@ -1,4 +1,4 @@
-import {userData,actionTypeUser,actionTypeFilter,user,filter,filterBy,root} from './types_redux';
+import {userData,actionTypeUser,actionTypeFilter,user,filter,filterBy,root, filterByT} from './types_redux';
  
 
 const initialState:user={
@@ -72,7 +72,8 @@ function User(state = initialState, action:actionTypeUser) {
 
 const initialStateFilter:filter={
    sortBy:"DEFAULT",
-   filterBy:"COMPANY"
+   filterBy:[]
+
 };
 
 

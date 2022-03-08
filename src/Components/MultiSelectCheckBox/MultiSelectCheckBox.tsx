@@ -8,43 +8,60 @@ interface props{
 }
 const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
    
-     let selectedItems=useRef(selected).current;
+     let selectedItems=useRef<{id:string,value:string}[]>([]).current;
+       
+    
+     //selectedItems=selected;
+     
      console.log("seleccted items", selectedItems);
    
      const onHandleChange=(event:any)=>{
 
          const {id,value}=event.target;
          let t;
-
-          if(selectedItems && selectedItems.length){
+ 
+         if(selectedItems && selectedItems.length){
            
-           const isSelected= selectedItems.find((item)=>item.id===id);
-          
+           const isSelected= selectedItems.find((item)=>item.id==id);
+           console.log("#121","isSelected---",isSelected);
               if(isSelected){
                   //if item already select remove it (filter)
                 t=selectedItems.filter((item:any)=>item.id!==isSelected.id);
-                handleChange(t);
+               
+                selectedItems=t;
+                console.log("#121","filter result---",selectedItems);
+
+                handleChange(selectedItems);
                 return;
                 }
 
           }
+          console.log("#121","result---",selectedItems);
           selectedItems.push({id,value});
+          
           handleChange(selectedItems)
           return;
-
-           
 
 
      }
 
-   const checkBoxContainer=(data:string,selected?:boolean)=>{
+     
+const isItemSelect=(item:{id:string,value:string}):boolean=>{
+    /**it will tell whether item is selected or not by fuiding the item in selected array */
+    if(selected && selected.length){
+      const itemFound=  selected.find((value)=>value.id==item.id)
+      if(itemFound)return true;
+    }
+    return false;
+}
+
+   const checkBoxContainer=(data:string,selected?:boolean,key?:string)=>{
+        
       return (<div className='flex-row centerFlexItem margin-top-bottom'>
-          <input id={Math.random().toString()} value={data} {...selected&&selected} onChange={onHandleChange} type='checkbox'/>
+          <input id={key||""} value={data} defaultChecked={selected}  onChange={onHandleChange} type='checkbox'/>
       <label>{data}</label></div>)
     }
-    const onSelect=(event:any)=>{
-     console.log("selected elect",event.target.value);
-    }
+     
     return (
         <div className="flex-column box-header">
            <div className="flex-row ">
@@ -53,8 +70,10 @@ const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
            </div>
              <div className="checkbox-container ">
              {
-              items.map((item)=>{
-                return checkBoxContainer(item)
+              items.map((item:any,index:number)=>{
+                let isSelected=isItemSelect(item)
+                
+                return checkBoxContainer(item,isSelected,index.toString())
               })
              }
               </div>
@@ -64,3 +83,4 @@ const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
 
 export default MultiSelectCheckBox;
 
+ 

@@ -1,4 +1,4 @@
-import {sortingType,userData,actionTypeUser,actionTypeFilter,user,filter,filterBy,root} from './types_redux';
+import {sortingType,userData,filterByT,actionTypeUser,actionTypeFilter,user,filter,filterBy,root} from './types_redux';
 
 
 
@@ -7,11 +7,19 @@ const sortData=(data:typeof sortingType):actionTypeFilter=>{
         type:'SORT_BY',
         payload:{
             sortBy:data,
-            filterBy:"COMPANY"
+            filterBy:[]
         }
     }
  };
 
+ const filterData=(data:filterByT):any=>{
+
+    return{
+        type:'FILTER',
+        payload:data
+    }
+
+ }
 
  export {
      sortData

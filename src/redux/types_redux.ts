@@ -17,6 +17,8 @@
  * 4-
  */
 
+import { type } from "os";
+
 interface userData{
       
           name:string,
@@ -37,10 +39,15 @@ interface userData{
 
 let sortingType:"DEFAULT"|"ACTIVE" |"CLOSED";
 let filterBy:"COMPANY";
+
+type filterByT={
+    id:string,
+    value:string
+}[];
  interface filter{
 
     sortBy:typeof sortingType,
-    filterBy:typeof filterBy
+    filterBy:filterByT
     
  }
 
@@ -74,4 +81,6 @@ export type {
      sortingType,
      filterBy,
      rootInitialState as root
+     ,
+     filterByT
 };

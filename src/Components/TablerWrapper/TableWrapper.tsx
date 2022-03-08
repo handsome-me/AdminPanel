@@ -34,7 +34,7 @@ const dispatch=useDispatch();
      console.log("selectedItems",selectedItem);
      setSelected(selectedItem)
    }
-   const companyArr=["Select All","Facebook","Google","Coinbase","Linkedin"];
+   const companyArr=["Select All","coinBase","razaorpay","gojek","google"];
     return (
         <div>
              <div className='flex-row'>
