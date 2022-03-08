@@ -2,6 +2,7 @@ import React, { memo, useEffect, useReducer, useRef, useState } from 'react';
 import './Table.css';
 import {useSelector,useDispatch } from 'react-redux';
 import {sortData} from '../../redux/action'
+import { reduceEachLeadingCommentRange } from 'typescript';
 
 interface TableData{
     Name:string,
@@ -20,14 +21,29 @@ interface Props {
 
 const Table = memo(()=>{ 
 
-    const {tableData,tableHeaders}= useSelector((state:any)=>state);
+    const {FilterReducer,UserReducer}= useSelector((state:any)=>state);
+    const data= useSelector((state:any)=>state);
+
+     console.log("data",data);
+
+
    const dispatch=useDispatch();
     const ref=useRef<typeof sortType>("Default");
-    const tableHeaders_=tableHeaders//Object.keys(tableData[0]);
+    ref.current=FilterReducer.sort_by;
 
+    const tableHeaders_=UserReducer.tableHeaders//Object.keys(tableData[0]);
+    let tableData=UserReducer.tableData;
     console.log("into table data",tableData);
    const [sort,setSort]=useState<typeof sortType>("Default");
+    
+   console.log("sorting----",ref.current);
+       
+     if(ref.current!=="Default"){
+         
+        tableData= _sortData(tableData,ref.current);
+     }
 
+       
     // const [data,setData]=useState()
    
      
@@ -46,14 +62,8 @@ const Table = memo(()=>{
      })
      */ 
 
-     useEffect(()=>{
-
-        //  if(sort!=="Default"){
-        //      console.log("sorting data ","#121",sort);
-        //      dispatch(sortData(sort));
-        //  }
-
-     },[sort])
+    
+      
  
     const handleClick=()=>{
        
@@ -88,7 +98,7 @@ const Table = memo(()=>{
               
              {
              tableData.map((data:any)=>{
-                const keys:any=tableHeaders//Object.keys(data);
+                const keys:any=tableHeaders_//Object.keys(data);
                 const rowData:any=[];
                 for(let i=0;i<keys.length;i++){
                    rowData.push(<td>{data[keys[i]]}</td>);
@@ -103,3 +113,26 @@ const Table = memo(()=>{
 });
 
 export default Table;
+
+
+
+const _sortData=(data:any,sortingType:"Active"|"Closed")=>{
+   
+
+    console.log("sortData is called for sorting...",data);
+ 
+    const sortedArr= data.sort((a:TableData,b:TableData)=>{
+     
+         const status=a.Status==sortingType?true:false;
+       //  console.log(" STATUS------- ",sortingType);
+      if(status){
+       return -1;
+      }
+ 
+       return 1;
+ 
+     })
+     console.log('sorted array',sortedArr);
+     return sortedArr;
+ }
+ 

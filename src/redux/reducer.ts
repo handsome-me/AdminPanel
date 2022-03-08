@@ -69,19 +69,19 @@ interface ActionType{
     payLoad:TableData[]
 }
  
-function reducer(state = initialState, action:any) {
+function UserReducer(state = initialState, action:any) {
     console.log("reducer",action.type);
     // Reducers usually look at the type of action that happened
     // to decide how to update the state
     switch (action.type) {
-      case 'table/sortData':
+      case 'table':
         {
             console.log("action",action.payload)
-           const sortedData= _sortData(state.tableData,action.payload); 
+          // const sortedData= _sortData(state.tableData,action.payload); 
             
            return  {
                ...state,
-               tableData:[...sortedData],
+             //  tableData:[...sortedData],
                
            }
               
@@ -96,25 +96,68 @@ function reducer(state = initialState, action:any) {
     }
   }
 
-export default reducer;
+ 
+
+ 
 
 
-const _sortData=(data:any,sortingType:"Active"|"Closed")=>{
-   
+const initialStateFilter={
+   sort_by:"Default",
+   filterBy:{
+       type:"Default",
+       filterItem:"Default"
+   }
+};
 
-   console.log("sortData is called for sorting...",data);
 
-   const sortedArr= data.sort((a:TableData,b:TableData)=>{
-    
-        const status=a.Status==sortingType?true:false;
-      //  console.log(" STATUS------- ",sortingType);
-     if(status){
-      return -1;
-     }
 
-      return 1;
-
-    })
-    console.log('sorted array',sortedArr);
-    return sortedArr;
+interface actionFilter{
+    type:string,
+    payload:typeof initialStateFilter
 }
+const filterReducer=(state=initialStateFilter,action:actionFilter):typeof initialStateFilter=>{
+
+         
+       switch( action.type){
+       
+        case "table/sortData":{
+            
+             return{
+                 ...initialStateFilter,
+                 sort_by:action.payload.sort_by,
+
+
+             }
+        }
+
+        case "filter":{
+
+
+            return{
+                ...initialStateFilter,
+                filterBy:action.payload.filterBy
+
+            }
+        }
+
+         
+       }
+       return initialStateFilter
+
+}
+
+const rootInitialState={
+    UserReducer:initialState,
+    FilterReducer:initialStateFilter
+}
+
+const rootReducer=(state=rootInitialState ,action:any):typeof rootInitialState=>{
+  
+    return{
+        UserReducer:UserReducer(state.UserReducer,action),
+        FilterReducer:filterReducer(state.FilterReducer,action)
+    }
+
+}
+
+export default rootReducer;
