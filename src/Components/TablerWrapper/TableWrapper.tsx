@@ -2,6 +2,7 @@ import React, { memo ,useRef} from 'react';
 import {useSelector,useDispatch,useStore} from 'react-redux';
 import { sortData } from '../../redux/action';
 import { root, userData } from '../../redux/types_redux';
+import MultiSelectCheckBox from '../MultiSelectCheckBox/MultiSelectCheckBox';
 import Table from '../Table/Table';
  
 const TableWrapper = memo(() => {
@@ -28,8 +29,8 @@ const dispatch=useDispatch();
     return (
         <div>
              <div className='flex-row'>
-             <div className='table-filter-box'>Company 
-             <button></button>
+             <div className='table-filter-box'>
+             <MultiSelectCheckBox/>
              </div>
              <div className='table-filter-box'>
                  Status
