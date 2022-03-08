@@ -4,6 +4,7 @@ import './App.css';
 import Table from './Components/Table/Table';
 /**Redux setup*/
 import ReduxWrapper from './redux/ReduxWrapper';
+import TableWrapper from './Components/TablerWrapper/TableWrapper';
  
 
 const tableHeaders=["Name","Company","Status","LastUpdate","Notes"];
@@ -35,10 +36,7 @@ function App(){
    <ReduxWrapper>
       <div className="App">
       <header className="Admin Panel">
-       <Table
-      //  tableHeaders={tableHeaders}
-      //  tableData={tableData}
-       ></Table>
+       <TableWrapper></TableWrapper>
       </header>
     </div>
    </ReduxWrapper>

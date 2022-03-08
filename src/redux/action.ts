@@ -1,10 +1,15 @@
- 
+import {sortingType,userData,actionTypeUser,actionTypeFilter,user,filter,filterBy,root} from './types_redux';
 
 
-const sortData=(data:"Active"|"Closed")=>{
-    return {type: 'table/sortData',payload:{
-        sort_by:data
-    }}
+
+const sortData=(data:typeof sortingType):actionTypeFilter=>{
+    return{
+        type:'SORT_BY',
+        payload:{
+            sortBy:data,
+            filterBy:"COMPANY"
+        }
+    }
  };
 
 
