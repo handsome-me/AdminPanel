@@ -2,6 +2,10 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Table from './Components/Table/Table';
+/**Redux setup*/
+import ReduxWrapper from './redux/ReduxWrapper';
+ 
+
 const tableHeaders=["Name","Company","Status","LastUpdate","Notes"];
 
 interface TableData{
@@ -28,14 +32,16 @@ const tableData:TableData[]=[{
 
 function App(){
   return (
-    <div className="App">
+   <ReduxWrapper>
+      <div className="App">
       <header className="Admin Panel">
        <Table
-       tableHeaders={tableHeaders}
-       tableData={tableData}
+      //  tableHeaders={tableHeaders}
+      //  tableData={tableData}
        ></Table>
       </header>
     </div>
+   </ReduxWrapper>
   );
 }
 

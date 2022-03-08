@@ -1,11 +1,12 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useReducer, useRef, useState } from 'react';
 import './Table.css';
-
+import {useSelector,useDispatch } from 'react-redux';
+import {sortData} from '../../redux/action'
 
 interface TableData{
     Name:string,
     Company:string,
-    Status:"Active" | "Closed",
+    Status:"Active" | "Close",
     LastUpdate:string,
     Notes:string
 };
@@ -15,11 +16,21 @@ interface Props {
     tableData:TableData[]
 }
 
- 
+ let  sortType:"Active" | "Closed" | "Default";
 
-const Table = memo(({tableHeaders,tableData}:Props)=>{ 
+const Table = memo(()=>{ 
+
+    const {tableData,tableHeaders}= useSelector((state:any)=>state);
+   const dispatch=useDispatch();
+    const ref=useRef<typeof sortType>("Default");
+    const tableHeaders_=tableHeaders//Object.keys(tableData[0]);
+
+    console.log("into table data",tableData);
+   const [sort,setSort]=useState<typeof sortType>("Default");
+
     // const [data,setData]=useState()
-    
+   
+     
 
     /**
      * Sorting alorithm for status
@@ -33,7 +44,30 @@ const Table = memo(({tableHeaders,tableData}:Props)=>{
         }
         return 1;
      })
-     */
+     */ 
+
+     useEffect(()=>{
+
+        //  if(sort!=="Default"){
+        //      console.log("sorting data ","#121",sort);
+        //      dispatch(sortData(sort));
+        //  }
+
+     },[sort])
+ 
+    const handleClick=()=>{
+       
+           
+        const sortType=ref.current==="Default"?"Closed":ref.current==="Active"?"Closed":"Active";
+        console.log("sortee",ref.current,"chanign to ",sortType)
+         ref.current=sortType;
+
+           //setSort(sortType);
+         dispatch(sortData(sortType));
+
+    }
+
+ 
     return (
         <div>
             <div className='flex-row'>
@@ -42,19 +76,19 @@ const Table = memo(({tableHeaders,tableData}:Props)=>{
              </div>
              <div className='table-filter-box'>
                  Status
-                 <button>up</button>
+                 <button onClick={handleClick}>up</button>
              </div>
             </div>
           <table className='table'>
              <tr>
-             {tableHeaders.map((header)=>{
+             {tableHeaders_.map((header:any)=>{
                  return <th>{header}</th>
              })}   
              </tr>
               
              {
              tableData.map((data:any)=>{
-                const keys:any=Object.keys(data);
+                const keys:any=tableHeaders//Object.keys(data);
                 const rowData:any=[];
                 for(let i=0;i<keys.length;i++){
                    rowData.push(<td>{data[keys[i]]}</td>);
