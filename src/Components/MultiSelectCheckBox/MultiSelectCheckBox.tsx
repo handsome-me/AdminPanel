@@ -1,12 +1,49 @@
-import React, { memo } from 'react';
+import React, { memo, useRef } from 'react';
+import { isConstructorDeclaration } from 'typescript';
 import './MultiSelect.css';
-const MultiSelectCheckBox = memo(() => {
+interface props{
+    selected:{id:string,value:string}[] ,
+    items:string[],
+    handleChange:any
+}
+const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
    
-   const companyArr=["Select All","Facebook","Google","Coinbase","Linkedin"];
+     let selectedItems=useRef(selected).current;
+     console.log("seleccted items", selectedItems);
    
-   const checkBoxContainer=(data:string)=>{
-      return (<div className='flex-row centerFlexItem margin-top-bottom'><input value={data}  type='checkbox'/>
+     const onHandleChange=(event:any)=>{
+
+         const {id,value}=event.target;
+         let t;
+
+          if(selectedItems && selectedItems.length){
+           
+           const isSelected= selectedItems.find((item)=>item.id===id);
+          
+              if(isSelected){
+                  //if item already select remove it (filter)
+                t=selectedItems.filter((item:any)=>item.id!==isSelected.id);
+                handleChange(t);
+                return;
+                }
+
+          }
+          selectedItems.push({id,value});
+          handleChange(selectedItems)
+          return;
+
+           
+
+
+     }
+
+   const checkBoxContainer=(data:string,selected?:boolean)=>{
+      return (<div className='flex-row centerFlexItem margin-top-bottom'>
+          <input id={Math.random().toString()} value={data} {...selected&&selected} onChange={onHandleChange} type='checkbox'/>
       <label>{data}</label></div>)
+    }
+    const onSelect=(event:any)=>{
+     console.log("selected elect",event.target.value);
     }
     return (
         <div className="flex-column box-header">
@@ -16,7 +53,7 @@ const MultiSelectCheckBox = memo(() => {
            </div>
              <div className="checkbox-container ">
              {
-              companyArr.map((item)=>{
+              items.map((item)=>{
                 return checkBoxContainer(item)
               })
              }

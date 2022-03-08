@@ -1,4 +1,4 @@
-import React, { memo ,useRef} from 'react';
+import React, { memo ,useRef, useState} from 'react';
 import {useSelector,useDispatch,useStore} from 'react-redux';
 import { sortData } from '../../redux/action';
 import { root, userData } from '../../redux/types_redux';
@@ -8,6 +8,8 @@ import Table from '../Table/Table';
 const TableWrapper = memo(() => {
     
 const {UserReducer,FilterReducer}= useSelector((state:root)=>state);
+const [selected,setSelected]=useState<[{id:string,value:string}]|[]>([]);
+
 const dispatch=useDispatch();
  console.log(FilterReducer);
 
@@ -26,11 +28,23 @@ const dispatch=useDispatch();
      const sortBy=value==="DEFAULT"?"CLOSED":value==="CLOSED"?"ACTIVE":"CLOSED"
       dispatch(sortData(sortBy));
    }
+
+   const handleCheckbox=(selectedItem:[{id:string,value:string}] | [])=>{
+
+     console.log("selectedItems",selectedItem);
+     setSelected(selectedItem)
+   }
+   const companyArr=["Select All","Facebook","Google","Coinbase","Linkedin"];
     return (
         <div>
              <div className='flex-row'>
              <div className='table-filter-box'>
-             <MultiSelectCheckBox/>
+             <MultiSelectCheckBox
+               selected={selected}
+               handleChange={handleCheckbox}
+               items={companyArr}
+
+             />
              </div>
              <div className='table-filter-box'>
                  Status
