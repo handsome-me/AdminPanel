@@ -10,13 +10,15 @@ const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
    
      let selectedItems=useRef<{id:string,value:string}[]>([]).current;
        
-    
+        
+      selectedItems=[...selected];
      //selectedItems=selected;
      
      console.log("seleccted items", "#131",selected);
    
      const onHandleChange=(event:any)=>{
-         console.log("onChnage in multiselectbox");
+         console.log("onChnage in multiselectbox",selectedItems);
+         console.log("onChnage in multiselectbox",selected);
          const {id,value}=event.target;
          let t;
  
@@ -28,10 +30,10 @@ const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
                   //if item already select remove it (filter)
                 t=selectedItems.filter((item:any)=>item.id!==isSelected.id);
                
-                selectedItems=t;
-                console.log("#121","filter result---",selectedItems);
+                // selectedItems=[...t];
+                console.log("#121","filter result---",...t);
 
-                handleChange(selectedItems);
+                handleChange([...t]);
                 return;
                 }
 
@@ -39,7 +41,7 @@ const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
           console.log("#121","result---",selectedItems);
           selectedItems.push({id,value});
           
-          handleChange(selectedItems)
+          handleChange([...selectedItems])
           return;
 
 

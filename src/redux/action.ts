@@ -17,7 +17,7 @@ const sortData=(data:typeof sortingType):actionTypeFilter=>{
     return{
         type:'FILTER',
         payload:{
-            sortBy:data,
+            sortBy:"",
             filterBy:data
         }
     }
