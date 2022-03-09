@@ -23,6 +23,7 @@ const dispatch=useDispatch();
   if(FilterReducer.filterBy&& FilterReducer.filterBy.length){
    const filteredData= filter(UserReducer,FilterReducer.filterBy);
    console.log("filtered data","#121",filteredData);
+   tableData=filteredData;
   }
 
 
@@ -43,7 +44,7 @@ const dispatch=useDispatch();
      //setSelected(selectedItem)
      dispatch((filterData(selectedItem)))
    }
-   const companyArr=["Select All","coinBase","razaorpay","gojek","google"];
+   const companyArr=["Select All","coinbase","razaorpay","gojek","google","meesho","facebook"];
      
     return (
         <div>

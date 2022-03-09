@@ -13,7 +13,7 @@ const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
     
      //selectedItems=selected;
      
-     console.log("seleccted items", selectedItems);
+     console.log("seleccted items", "#131",selected);
    
      const onHandleChange=(event:any)=>{
          console.log("onChnage in multiselectbox");
@@ -46,10 +46,11 @@ const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
      }
 
      
-const isItemSelect=(item:{id:string,value:string}):boolean=>{
+const isItemSelect=(item:string):boolean=>{
     /**it will tell whether item is selected or not by fuiding the item in selected array */
+   // console.log("#131","-isIrem",selected,"---",item);
     if(selected && selected.length){
-      const itemFound=  selected.find((value)=>value.id==item.id)
+      const itemFound=  selected.find((value)=>value.value.toLowerCase()==item.toLowerCase())
       if(itemFound)return true;
     }
     return false;
@@ -72,7 +73,7 @@ const isItemSelect=(item:{id:string,value:string}):boolean=>{
              {
               items.map((item:any,index:number)=>{
                 let isSelected=isItemSelect(item)
-                
+                console.log("#131",isSelected,"- ",item);
                 return checkBoxContainer(item,isSelected,index.toString())
               })
              }

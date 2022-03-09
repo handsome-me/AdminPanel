@@ -36,6 +36,22 @@ const initialState:user={
         status:"Closed",
         lastUpdate:"1/02/2021",
         notes:"Hey hi how are you people doing,,,"
+    },
+    {
+        name:"Amu",
+        id:2,
+        company:"coinbase",
+        status:"Closed",
+        lastUpdate:"1/02/2021",
+        notes:"Hey hi how are you people doing,,,"
+    },
+    {
+        name:"Amu",
+        id:2,
+        company:"meesho",
+        status:"Closed",
+        lastUpdate:"1/02/2021",
+        notes:"Hey hi how are you people doing,,,"
     }
    ]
 
