@@ -44,7 +44,7 @@ const dispatch=useDispatch();
      //setSelected(selectedItem)
      dispatch((filterData(selectedItem)))
    }
-   const companyArr=["Select All","coinbase","razaorpay","gojek","google","meesho","facebook"];
+   const companyArr=["Select All","coinbase","razaorpay","gojek","google","meesho","facebokk"];
      
     return (
         <div>

@@ -18,7 +18,7 @@ const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
    
      const onHandleChange=(event:any)=>{
          console.log("onChnage in multiselectbox",selectedItems);
-         console.log("onChnage in multiselectbox",selected);
+         console.log("onChnage in multiselectbox",selectedItems);
          const {id,value}=event.target;
          let t;
  
