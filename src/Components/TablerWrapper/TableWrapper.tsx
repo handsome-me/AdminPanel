@@ -1,7 +1,7 @@
 import React, { memo ,useRef, useState} from 'react';
 import {useSelector,useDispatch,useStore} from 'react-redux';
-import { sortData } from '../../redux/action';
-import { root, userData } from '../../redux/types_redux';
+import { filterData, sortData, } from '../../redux/action';
+import { root, user, userData } from '../../redux/types_redux';
 import MultiSelectCheckBox from '../MultiSelectCheckBox/MultiSelectCheckBox';
 import Table from '../Table/Table';
  
@@ -19,6 +19,14 @@ const dispatch=useDispatch();
   if(FilterReducer.sortBy!=="DEFAULT"){
     tableData= _sortData(tableData,FilterReducer.sortBy)
   };
+  
+  if(FilterReducer.filterBy&& FilterReducer.filterBy.length){
+   const filteredData= filter(UserReducer,FilterReducer.filterBy);
+   console.log("filtered data","#121",filteredData);
+  }
+
+
+
 
    console.log(tableData);
 
@@ -32,15 +40,17 @@ const dispatch=useDispatch();
    const handleCheckbox=(selectedItem:[{id:string,value:string}] | [])=>{
 
      console.log("selectedItems",selectedItem);
-     setSelected(selectedItem)
+     //setSelected(selectedItem)
+     dispatch((filterData(selectedItem)))
    }
    const companyArr=["Select All","coinBase","razaorpay","gojek","google"];
+     
     return (
         <div>
              <div className='flex-row'>
              <div className='table-filter-box'>
              <MultiSelectCheckBox
-               selected={selected}
+               selected={FilterReducer.filterBy}
                handleChange={handleCheckbox}
                items={companyArr}
 
@@ -81,5 +91,20 @@ const _sortData=(data:any,sortingType:"ACTIVE"|"CLOSED")=>{
      })
      console.log('sorted array',sortedArr);
      return sortedArr;
+ }
+ 
+ const filter=(data1:user,data2:any)=>{
+     const _result:any=[];
+      data2.map((item:any)=>{
+        console.log("#131",data2);
+        const avl=data1.data.filter((d)=>{
+          return d.company.toLowerCase()==item.value.toLowerCase();
+        });
+        
+        _result.push(...avl);
+
+     });
+     return _result
+
  }
  

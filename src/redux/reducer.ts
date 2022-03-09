@@ -8,7 +8,7 @@ const initialState:user={
     data:[{
         name:"Meghraj",
         id:1,
-        company:"CoinBase",
+        company:"gojek",
         status:"Active",
         lastUpdate:"1/02/2021",
         notes:"Hey hi how are you people doing,,,"
@@ -80,6 +80,7 @@ const initialStateFilter:filter={
  
 const filterReducer=(state=initialStateFilter,action:actionTypeFilter):typeof initialStateFilter=>{
 
+    console.log('filter by',action.payload);
          
        switch( action.type){
        

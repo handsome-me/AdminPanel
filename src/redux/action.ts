@@ -13,14 +13,18 @@ const sortData=(data:typeof sortingType):actionTypeFilter=>{
  };
 
  const filterData=(data:filterByT):any=>{
-
+    
     return{
         type:'FILTER',
-        payload:data
+        payload:{
+            sortBy:data,
+            filterBy:data
+        }
     }
 
  }
 
  export {
-     sortData
+     sortData,
+     filterData
  }
