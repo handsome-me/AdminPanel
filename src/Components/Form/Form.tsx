@@ -37,6 +37,7 @@ function Form({onSubmit}:{onSubmit:Function}) {
         for(let i=0;i<elements.length;i++){
              if(elements[i].name!=="")
             formObject[elements[i].name.toLowerCase()]=elements[i].value;
+    
         };
         console.log("form  object ",formObject);
         onSubmit(formObject);
