@@ -2,16 +2,13 @@ import "firebase/firestore";
 import firebase from 'firebase/app';
 import config from '../config';
 import Firebase from 'firebase';
+import { user } from "../redux/types_redux";
 
-const addData=async function(){
+const addData=async function(userData:user){
     
-  const data=await Firebase.firestore().collection('Data').doc().set({Name:"Meghraj",
-  Company:"Razarpay",
-  Status:"Active",
-  LastUpdate:"1/07/2022",
-  Notes:"Hey hi, its working really good....."
-})
-console.log("data saved");
+  const data=await Firebase.firestore().collection('Data').doc().set(userData)
+  return data;
+
 };
 
 const getUserData=async()=>{
@@ -21,5 +18,5 @@ const getUserData=async()=>{
 export {
     addData,
     getUserData,
-    
+
 }
