@@ -1,3 +1,4 @@
+import { act } from 'react-dom/test-utils';
 import {userData,actionTypeUser,actionTypeFilter,user,filter,filterBy,root, filterByT} from './types_redux';
  
 
@@ -59,17 +60,21 @@ const initialState:user={
 }
  
  
-function User(state = initialState, action:actionTypeUser) {
+function User(state = initialState, action:actionTypeUser | any) {
     // Reducers usually look at the type of action that happened
     // to decide how to update the state
     switch (action.type) {
       case "ADD_DATA":
         {
             console.log("action",action.payload)
+             
           // const sortedData= _sortData(state.tableData,action.payload); 
-            
+            //  const dataObject:userData=initialState.data
+            let data=new Date().getFullYear();
+               action.payload.lastUpdate=data.toString();
            return  {
                ...state,
+               data:[...state.data,action.payload]
              //  tableData:[...sortedData],
                
            }

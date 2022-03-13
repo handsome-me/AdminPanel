@@ -22,7 +22,7 @@ const inputTypes=[{
 
 
 
-function Form(Prop:Props) {
+function Form({onSubmit}:{onSubmit:Function}) {
    
     const  onChange=()=>{
 
@@ -31,12 +31,15 @@ function Form(Prop:Props) {
         event.preventDefault();
 
         const elements=event.target;
-
-        console.log("onClick ", event);
-        console.log("onClick ", event.elements);
+        const formObject:any={};
+        // console.log("onClick ", event);
+        // console.log("onClick ", event.elements);
         for(let i=0;i<elements.length;i++){
-            console.log(elements[i].name,elements[i].value)
-        }
+             if(elements[i].name!=="")
+            formObject[elements[i].name.toLowerCase()]=elements[i].value;
+        };
+        console.log("form  object ",formObject);
+        onSubmit(formObject);
     
     };
 

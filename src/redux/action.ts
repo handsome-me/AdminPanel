@@ -24,7 +24,19 @@ const sortData=(data:typeof sortingType):actionTypeFilter=>{
 
  }
 
+ const addData=(data:any):any=>{
+
+
+     return {
+         type:"ADD_DATA",
+        payload:data
+     }
+
+
+ }
+
  export {
      sortData,
-     filterData
+     filterData,
+     addData
  }

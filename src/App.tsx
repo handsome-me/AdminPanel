@@ -6,7 +6,11 @@ import Table from './Components/Table/Table';
 import ReduxWrapper from './redux/ReduxWrapper';
 import TableWrapper from './Components/TablerWrapper/TableWrapper';
 import Form from './Components/Form/Form';
- 
+import { addData, filterData, sortData, } from './redux/action';
+
+import {useSelector,useDispatch,useStore} from 'react-redux';
+import { user } from './redux/types_redux';
+
 
 const tableHeaders=["Name","Company","Status","LastUpdate","Notes"];
 
@@ -31,14 +35,18 @@ const tableData:TableData[]=[{
   LastUpdate:"1/07/2022",
   Notes:"Hey hi, its working really good....."
 }];
-
+ 
+ 
 function App(){
+   
+   
+  
   return (
    <ReduxWrapper>
       <div className="App">
       <header className="Admin Panel">
        <TableWrapper></TableWrapper>
-       <Form></Form>
+       
       </header>
     </div>
    </ReduxWrapper>

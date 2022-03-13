@@ -1,7 +1,8 @@
 import React, { memo ,useRef, useState} from 'react';
 import {useSelector,useDispatch,useStore} from 'react-redux';
-import { filterData, sortData, } from '../../redux/action';
+import { addData, filterData, sortData, } from '../../redux/action';
 import { root, user, userData } from '../../redux/types_redux';
+import Form from '../Form/Form';
 import MultiSelectCheckBox from '../MultiSelectCheckBox/MultiSelectCheckBox';
 import Table from '../Table/Table';
  
@@ -45,7 +46,13 @@ const dispatch=useDispatch();
      dispatch((filterData(selectedItem)))
    }
    const companyArr=["Select All","coinbase","razaorpay","gojek","google","meesho","facebokk"];
-     
+    
+   
+   const onFormSubmit=(obj:user)=>{
+    
+    dispatch(addData(obj));
+   console.log("add data ", obj);
+  }
     return (
         <div>
              <div className='flex-row'>
@@ -66,6 +73,9 @@ const dispatch=useDispatch();
        tableHeaders={tablerHeaders}
        tableData={tableData}
        ></Table>
+        <Form 
+       onSubmit={onFormSubmit}
+       ></Form>
         </div>
     );
 });
