@@ -5,6 +5,7 @@ import Table from './Components/Table/Table';
 /**Redux setup*/
 import ReduxWrapper from './redux/ReduxWrapper';
 import TableWrapper from './Components/TablerWrapper/TableWrapper';
+import Form from './Components/Form/Form';
  
 
 const tableHeaders=["Name","Company","Status","LastUpdate","Notes"];
@@ -37,6 +38,7 @@ function App(){
       <div className="App">
       <header className="Admin Panel">
        <TableWrapper></TableWrapper>
+       <Form></Form>
       </header>
     </div>
    </ReduxWrapper>

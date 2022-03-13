@@ -6,7 +6,7 @@ interface props{
     items:string[],
     handleChange:any
 }
-const MultiSelectCheckBox = memo(({selected,items,handleChange}:props) => {
+const MultiSelectCheckBox = memo(({selected,items,handleChange}:props   ) => {
    
      let selectedItems=useRef<{id:string,value:string}[]>([]).current;
        
