@@ -1,6 +1,6 @@
 import React, { memo ,useRef, useState} from 'react';
 import {useSelector,useDispatch,useStore} from 'react-redux';
-import { addData, filterData, sortData, } from '../../redux/action';
+import {  filterData, saveData, sortData, } from '../../redux/action';
 import { root, user, userData } from '../../redux/types_redux';
 import Form from '../Form/Form';
 import MultiSelectCheckBox from '../MultiSelectCheckBox/MultiSelectCheckBox';
@@ -50,7 +50,7 @@ const dispatch=useDispatch();
    
    const onFormSubmit=(obj:user)=>{
     
-    dispatch(addData(obj));
+    dispatch(saveData(obj));
    console.log("add data ", obj);
   }
     return (

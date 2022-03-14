@@ -1,3 +1,4 @@
+import { addData } from '../FireBase/FireBase';
 import {sortingType,userData,filterByT,actionTypeUser,actionTypeFilter,user,filter,filterBy,root} from './types_redux';
 
 
@@ -24,13 +25,15 @@ const sortData=(data:typeof sortingType):actionTypeFilter=>{
 
  }
 
- const addData=(data:any):any=>{
+ const saveData=(data:any):any=>{
 
-
+   
      return {
          type:"ADD_DATA",
         payload:data
      }
+
+
 
 
  }
@@ -38,5 +41,5 @@ const sortData=(data:typeof sortingType):actionTypeFilter=>{
  export {
      sortData,
      filterData,
-     addData
+     saveData
  }

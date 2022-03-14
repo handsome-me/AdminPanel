@@ -12,8 +12,10 @@ const addData=async function(userData:user){
 };
 
 const getUserData=async()=>{
+   
     const snapshot = await firebase.firestore().collection('Data').get()
     return snapshot.docs.map(doc => doc.data());
+
 }
 export {
     addData,

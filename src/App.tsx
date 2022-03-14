@@ -9,7 +9,7 @@ import ReduxWrapper from './redux/ReduxWrapper';
 import TableWrapper from './Components/TablerWrapper/TableWrapper';
 import Form from './Components/Form/Form';
  
-import { addData, filterData, sortData, } from './redux/action';
+import { saveData, filterData, sortData, } from './redux/action';
 import firebase from 'firebase/app';
  // import { doc, setDoc } from 'firebase/firestore';
 //const {doc,setDoc} =require('firebase/firestore');
@@ -63,21 +63,13 @@ async function AddUser(){
   //   state: "CA",
   //   country: "USA"
   // });
-
-  const data=await Firebase.firestore().collection('Data').doc().set({Name:"Meghraj",
-  Company:"Razarpay",
-  Status:"Active",
-  LastUpdate:"1/07/2022",
-  Notes:"Hey hi, its working really good....."
-})
-console.log("data saved");
+ 
 
 }
 
 
 async function getMarker() {
-  const snapshot = await firebase.firestore().collection('Data').get()
-  return snapshot.docs.map(doc => doc.data());
+  
 }
 
 const getUserData = () => {
