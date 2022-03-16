@@ -27,7 +27,12 @@ const sortData=(data:typeof sortingType):actionTypeFilter=>{
 
  const saveData=(data:any):any=>{
 
-   
+      return ()=>{
+        return{
+            type:"ADD_DATA",
+           payload:data
+        }
+      }
      return {
          type:"ADD_DATA",
         payload:data
